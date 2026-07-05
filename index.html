@@ -1,0 +1,3616 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>InkLog Ultimate</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="background-ink">
+
+<div class="ink ink1"></div>
+<div class="ink ink2"></div>
+<div class="ink ink3"></div>
+<div class="ink ink4"></div>
+<div class="ink ink5"></div>
+
+</div>
+
+<div class="app">
+
+<!-- ======================
+SIDEBAR
+====================== -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>
+
+<span class="yellow">Ink</span><span class="white">Log</span>
+
+</h1>
+
+<p>
+
+Splatoon Battle Record
+
+</p>
+
+</div>
+
+<button class="recordButton">
+
+<i class="fa-solid fa-plus"></i>
+
+試合を記録する
+
+</button>
+
+<nav>
+
+<button class="nav active"
+data-page="record">
+
+<i class="fa-solid fa-pen"></i>
+
+<span>記録</span>
+
+</button>
+
+<button class="nav"
+data-page="history">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<span>履歴</span>
+
+</button>
+
+<button class="nav"
+data-page="statistics">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<span>統計</span>
+
+</button>
+
+<button class="nav"
+data-page="analysis">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>分析</span>
+
+</button>
+
+<button class="nav"
+data-page="weapon">
+
+<i class="fa-solid fa-gun"></i>
+
+<span>ブキ</span>
+
+</button>
+
+<button class="nav"
+data-page="stage">
+
+<i class="fa-solid fa-map-location-dot"></i>
+
+<span>ステージ</span>
+
+</button>
+
+<button class="nav"
+data-page="salmon">
+
+<i class="fa-solid fa-fish"></i>
+
+<span>サーモンラン</span>
+
+</button>
+
+<button class="nav"
+data-page="calendar">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<span>カレンダー</span>
+
+</button>
+
+<button class="nav"
+data-page="settings">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>設定</span>
+
+</button>
+
+</nav>
+
+<hr>
+
+<div class="quickStats">
+
+<h3>クイック統計</h3>
+
+<div class="miniCard">
+
+<span>試合数</span>
+
+<strong id="matchCount">
+
+0
+
+</strong>
+
+</div>
+
+<div class="miniCard">
+
+<span>勝率</span>
+
+<strong id="winRate">
+
+0%
+
+</strong>
+
+</div>
+
+<div class="miniCard">
+
+<span>K/D</span>
+
+<strong id="kd">
+
+0.00
+
+</strong>
+
+</div>
+
+</div>
+</aside>
+
+<!-- ======================
+MAIN
+====================== -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="left">
+
+            <h2 id="pageTitle">
+
+                試合を記録
+
+            </h2>
+
+            <p>
+
+                Splatoon Battle Manager
+
+            </p>
+
+        </div>
+
+        <div class="right">
+
+            <button class="topButton">
+
+                <i class="fa-solid fa-download"></i>
+
+                エクスポート
+
+            </button>
+
+            <button class="topButton">
+
+                <i class="fa-solid fa-upload"></i>
+
+                インポート
+
+            </button>
+
+            <button class="topButton">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- ======================
+    RECORD PAGE
+    ====================== -->
+
+    <section
+        class="page active"
+        id="record">
+
+        <div class="pageGrid">
+
+            <!-- 左 -->
+
+            <div class="leftColumn">
+
+                <div class="card">
+
+                    <h3>
+
+                        基本情報
+
+                    </h3>
+
+                    <div class="formGrid">
+
+                        <div class="inputBox">
+
+                            <label>
+
+                                日時
+
+                            </label>
+
+                            <input
+                                type="datetime-local"
+                                id="battleDate">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>
+
+                                モード
+
+                            </label>
+
+                            <select id="mode">
+
+                                <option>レギュラーマッチ</option>
+                                <option>バンカラ(チャレンジ)</option>
+                                <option>バンカラ(オープン)</option>
+                                <option>Xマッチ</option>
+                                <option>イベントマッチ</option>
+                                <option>フェスマッチ</option>
+                                <option>サーモンラン</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>
+
+                                ルール
+
+                            </label>
+
+                            <select id="rule">
+
+                                <option>ナワバリバトル</option>
+                                <option>ガチエリア</option>
+                                <option>ガチヤグラ</option>
+                                <option>ガチホコ</option>
+                                <option>ガチアサリ</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>
+
+                                結果
+
+                            </label>
+
+                            <select id="result">
+
+                                <option>勝ち</option>
+                                <option>負け</option>
+                                <option>通信エラー</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                                <!-- ブキ情報 -->
+
+                <div class="card">
+
+                    <h3>
+
+                        ブキ情報
+
+                    </h3>
+
+                    <div class="weaponArea">
+
+                        <div class="weaponPreview">
+
+                            <img
+                                id="weaponImage"
+                                src="assets/weapons/splattershot.png"
+                                alt="ブキ画像">
+
+                        </div>
+
+                        <div class="weaponInputs">
+
+                            <div class="inputBox">
+
+                                <label>
+
+                                    メインブキ
+
+                                </label>
+
+                                <select id="weapon">
+
+                                    <option value="splattershot">スプラシューター</option>
+                                    <option value="splattershot_collab">スプラシューターコラボ</option>
+                                    <option value="52gal">.52ガロン</option>
+                                    <option value="96gal">.96ガロン</option>
+                                    <option value="nzap85">N-ZAP85</option>
+                                    <option value="sharpmarker">シャープマーカー</option>
+                                    <option value="wakaba">わかばシューター</option>
+                                    <option value="momiji">もみじシューター</option>
+                                    <option value="promodeler_mg">プロモデラーMG</option>
+                                    <option value="splashomatic">シャープマーカーネオ</option>
+                                    <option value="liter4k">リッター4K</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="inputBox">
+
+                                <label>
+
+                                    サブ
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="subWeapon"
+                                    readonly>
+
+                            </div>
+
+                            <div class="inputBox">
+
+                                <label>
+
+                                    スペシャル
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="specialWeapon"
+                                    readonly>
+
+                            </div>
+
+                            <div class="inputBox">
+
+                                <label>
+
+                                    ブキ熟練度
+
+                                </label>
+
+                                <select id="freshness">
+
+                                    <option>★0</option>
+                                    <option>★1</option>
+                                    <option>★2</option>
+                                    <option>★3</option>
+                                    <option>★4</option>
+                                    <option>★5</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 戦績 -->
+
+                <div class="card">
+
+                    <h3>
+
+                        戦績
+
+                    </h3>
+
+                    <div class="formGrid">
+                                              <div class="inputBox">
+
+                            <label>キル</label>
+
+                            <input
+                                type="number"
+                                id="kill"
+                                min="0"
+                                value="0">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>アシスト</label>
+
+                            <input
+                                type="number"
+                                id="assist"
+                                min="0"
+                                value="0">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>デス</label>
+
+                            <input
+                                type="number"
+                                id="death"
+                                min="0"
+                                value="0">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>K/D</label>
+
+                            <input
+                                type="text"
+                                id="kd"
+                                value="0.00"
+                                readonly>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>スペシャル回数</label>
+
+                            <input
+                                type="number"
+                                id="specialCount"
+                                min="0"
+                                value="0">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>塗りポイント</label>
+
+                            <input
+                                type="number"
+                                id="paint"
+                                min="0"
+                                value="0">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>ウデマエ</label>
+
+                            <select id="rank">
+
+                                <option>C-</option>
+                                <option>C</option>
+                                <option>C+</option>
+                                <option>B-</option>
+                                <option>B</option>
+                                <option>B+</option>
+                                <option>A-</option>
+                                <option>A</option>
+                                <option>A+</option>
+                                <option>S</option>
+                                <option>S+</option>
+                                <option>S+10</option>
+                                <option>S+20</option>
+                                <option>S+30</option>
+                                <option>S+40</option>
+                                <option>S+50</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>Xパワー</label>
+
+                            <input
+                                type="number"
+                                id="xPower"
+                                step="0.1"
+                                placeholder="例：2450.8">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 表彰 -->
+
+                <div class="card">
+
+                    <h3>
+
+                        表彰
+
+                    </h3>
+
+                    <div class="formGrid">
+
+                        <div class="inputBox">
+
+                            <label>金表彰①</label>
+
+                            <input
+                                type="text"
+                                id="gold1"
+                                placeholder="最多キル">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>金表彰②</label>
+
+                            <input
+                                type="text"
+                                id="gold2">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>金表彰③</label>
+
+                            <input
+                                type="text"
+                                id="gold3">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>銀表彰①</label>
+
+                            <input
+                                type="text"
+                                id="silver1">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>銀表彰②</label>
+
+                            <input
+                                type="text"
+                                id="silver2">
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>銀表彰③</label>
+
+                            <input
+                                type="text"
+                                id="silver3">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                                <!-- その他 -->
+
+                <div class="card">
+
+                    <h3>
+
+                        その他
+
+                    </h3>
+
+                    <div class="formGrid">
+
+                        <div class="inputBox full">
+
+                            <label>
+
+                                タグ
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tags"
+                                placeholder="例：逆転勝ち, フレンド, Xマッチ">
+
+                        </div>
+
+                        <div class="inputBox full">
+
+                            <label>
+
+                                メモ
+
+                            </label>
+
+                            <textarea
+                                id="memo"
+                                rows="5"
+                                placeholder="反省点・良かった点・次回意識すること"></textarea>
+
+                        </div>
+
+                        <div class="inputBox full">
+
+                            <label>
+
+                                リザルト画像（最大5枚）
+
+                            </label>
+
+                            <input
+                                type="file"
+                                id="battleImages"
+                                accept="image/*"
+                                multiple>
+
+                            <div id="imagePreview"
+                                 class="imagePreview">
+
+                            </div>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>
+
+                                お気に入り
+
+                            </label>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="favorite">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 保存 -->
+
+                <div class="card actionCard">
+
+                    <button
+                        id="saveButton"
+                        class="primaryButton">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        保存する
+
+                    </button>
+
+                    <button
+                        id="resetButton"
+                        class="secondaryButton">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                        リセット
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- 右カラム -->
+
+            <div class="rightColumn">
+
+                <div class="card">
+
+                    <h3>
+
+                        リアルタイム統計
+
+                    </h3>
+
+                    <div class="statList">
+
+                        <div class="statItem">
+
+                            <span>勝率</span>
+
+                            <strong id="liveWinRate">0%</strong>
+
+                        </div>
+
+                        <div class="statItem">
+
+                            <span>K/D</span>
+
+                            <strong id="liveKD">0.00</strong>
+
+                        </div>
+
+                        <div class="statItem">
+
+                            <span>平均キル</span>
+
+                            <strong id="liveKill">0.0</strong>
+
+                        </div>
+
+                        <div class="statItem">
+
+                            <span>平均デス</span>
+
+                            <strong id="liveDeath">0.0</strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- ======================
+HISTORY PAGE
+====================== -->
+
+<section
+    class="page"
+    id="history">
+
+    <div class="pageGrid">
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    試合履歴
+
+                </h3>
+
+                <div class="historyToolbar">
+
+                    <input
+                        type="text"
+                        id="historySearch"
+                        placeholder="検索（ブキ・ステージ・メモ・タグ）">
+
+                    <select id="historyResult">
+
+                        <option value="">すべての結果</option>
+                        <option value="win">勝ち</option>
+                        <option value="lose">負け</option>
+                        <option value="draw">通信エラー</option>
+
+                    </select>
+
+                    <select id="historyRule">
+
+                        <option value="">すべてのルール</option>
+                        <option>ナワバリバトル</option>
+                        <option>ガチエリア</option>
+                        <option>ガチヤグラ</option>
+                        <option>ガチホコ</option>
+                        <option>ガチアサリ</option>
+
+                    </select>
+
+                    <select id="historySort">
+
+                        <option value="new">新しい順</option>
+                        <option value="old">古い順</option>
+                        <option value="win">勝率順</option>
+
+                    </select>
+
+                </div>
+
+                <div
+                    id="historyList"
+                    class="historyList">
+
+                </div>
+
+            </div>
+
+        </div>
+                    <!-- 履歴カードのテンプレート -->
+
+            <template id="historyCardTemplate">
+
+                <article class="historyCard">
+
+                    <div class="historyHeader">
+
+                        <div class="historyWeapon">
+
+                            <img
+                                class="historyWeaponImage"
+                                src="assets/weapons/splattershot.png"
+                                alt="ブキ">
+
+                            <div>
+
+                                <h4 class="historyWeaponName">
+
+                                    スプラシューター
+
+                                </h4>
+
+                                <span class="historyDate">
+
+                                    2026/07/05 18:30
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span class="resultBadge win">
+
+                            WIN
+
+                        </span>
+
+                    </div>
+
+                    <div class="historyStage">
+
+                        <img
+                            class="stageImage"
+                            src="assets/stages/yagara.png"
+                            alt="ステージ">
+
+                        <div>
+
+                            <strong class="stageName">
+
+                                ヤガラ市場
+
+                            </strong>
+
+                            <p class="ruleName">
+
+                                ガチエリア
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="historyStats">
+
+                        <div>
+
+                            <span>K</span>
+
+                            <strong class="kill">
+
+                                15
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>A</span>
+
+                            <strong class="assist">
+
+                                4
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>D</span>
+
+                            <strong class="death">
+
+                                5
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>SP</span>
+
+                            <strong class="special">
+
+                                6
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>塗り</span>
+
+                            <strong class="paint">
+
+                                1187
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="historyTags">
+
+                        <span class="tag">
+
+                            #逆転勝ち
+
+                        </span>
+
+                        <span class="tag">
+
+                            #Xマッチ
+
+                        </span>
+
+                    </div>
+
+                    <div class="historyFooter">
+
+                        <button class="iconButton editBattle">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </button>
+
+                        <button class="iconButton duplicateBattle">
+
+                            <i class="fa-solid fa-copy"></i>
+
+                        </button>
+
+                        <button class="iconButton favoriteBattle">
+
+                            <i class="fa-solid fa-star"></i>
+
+                        </button>
+
+                        <button class="iconButton deleteBattle">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </template>
+
+        </div>
+
+        <!-- 右側 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    履歴サマリー
+
+                </h3>
+
+                <div class="summaryGrid">
+
+                    <div class="summaryItem">
+
+                        <span>総試合数</span>
+
+                        <strong id="historyMatchCount">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summaryItem">
+
+                        <span>勝率</span>
+
+                        <strong id="historyWinRate">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summaryItem">
+
+                        <span>平均K/D</span>
+
+                        <strong id="historyKD">
+
+                            0.00
+
+                        </strong>
+
+                    </div>
+
+                    <div class="summaryItem">
+
+                        <span>お気に入り</span>
+
+                        <strong id="favoriteCount">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+履歴詳細モーダル
+====================== -->
+
+<div
+    class="modal"
+    id="historyModal">
+
+    <div class="modalContent">
+
+        <button
+            class="closeModal"
+            id="closeHistoryModal">
+
+            ×
+
+        </button>
+
+        <div class="modalHeader">
+
+            <img
+                id="modalWeaponImage"
+                src="assets/weapons/splattershot.png"
+                alt="weapon">
+
+            <div>
+
+                <h2 id="modalWeaponName">
+
+                    スプラシューター
+
+                </h2>
+
+                <p id="modalDate">
+
+                    2026/07/05
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="modalGrid">
+
+            <div class="modalItem">
+
+                <span>ルール</span>
+
+                <strong id="modalRule"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>ステージ</span>
+
+                <strong id="modalStage"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>結果</span>
+
+                <strong id="modalResult"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>キル</span>
+
+                <strong id="modalKill"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>アシスト</span>
+
+                <strong id="modalAssist"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>デス</span>
+
+                <strong id="modalDeath"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>スペシャル</span>
+
+                <strong id="modalSpecial"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>塗り</span>
+
+                <strong id="modalPaint"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>Xパワー</span>
+
+                <strong id="modalPower"></strong>
+
+            </div>
+
+            <div class="modalItem">
+
+                <span>ウデマエ</span>
+
+                <strong id="modalRank"></strong>
+
+            </div>
+
+        </div>
+
+        <div class="modalMemo">
+
+            <h3>メモ</h3>
+
+            <p id="modalMemo"></p>
+
+        </div>
+
+        <div
+            id="modalImages"
+            class="modalImages">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 履歴ページ終了 -->
+<!-- ======================
+STATISTICS PAGE
+====================== -->
+
+<section
+    class="page"
+    id="statistics">
+
+    <div class="pageGrid">
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    総合成績
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>総試合数</span>
+
+                        <strong id="totalBattle">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>勝利数</span>
+
+                        <strong id="totalWin">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>敗北数</span>
+
+                        <strong id="totalLose">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>勝率</span>
+
+                        <strong id="totalWinRate">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均K/D</span>
+
+                        <strong id="averageKD">
+
+                            0.00
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均キル</span>
+
+                        <strong id="averageKill">
+
+                            0.0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均デス</span>
+
+                        <strong id="averageDeath">
+
+                            0.0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均塗り</span>
+
+                        <strong id="averagePaint">
+
+                            0p
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ブキランキング
+
+                </h3>
+
+                <div
+                    id="weaponRanking"
+                    class="rankingList">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    勝率ランキング
+
+                </h3>
+
+                <div
+                    id="weaponWinRanking"
+                    class="rankingList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    連勝記録
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>現在</span>
+
+                        <strong id="currentStreak">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>最高</span>
+
+                        <strong id="bestStreak">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+                        <div class="card">
+
+                <h3>
+
+                    ルール別勝率
+
+                </h3>
+
+                <div
+                    id="ruleStatistics"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ステージ別勝率
+
+                </h3>
+
+                <div
+                    id="stageStatistics"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    スペシャル使用率
+
+                </h3>
+
+                <div
+                    id="specialRanking"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    時間帯分析
+
+                </h3>
+
+                <div
+                    id="timeStatistics"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- グラフエリア -->
+
+    <div class="card">
+
+        <h3>
+
+            勝率・K/D推移
+
+        </h3>
+
+        <canvas
+            id="battleChart"
+            height="120">
+
+        </canvas>
+
+    </div>
+
+    <div class="graphGrid">
+
+        <div class="card">
+
+            <h3>
+
+                月別試合数
+
+            </h3>
+
+            <canvas
+                id="monthChart"
+                height="180">
+
+            </canvas>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                ブキ使用割合
+
+            </h3>
+
+            <canvas
+                id="weaponChart"
+                height="180">
+
+            </canvas>
+
+        </div>
+
+    </div>
+
+    <div class="graphGrid">
+
+        <div class="card">
+
+            <h3>
+
+                勝敗割合
+
+            </h3>
+
+            <canvas
+                id="resultChart"
+                height="180">
+
+            </canvas>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                ルール別試合数
+
+            </h3>
+
+            <canvas
+                id="ruleChart"
+                height="180">
+
+            </canvas>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+ANALYSIS PAGE
+====================== -->
+
+<section
+    class="page"
+    id="analysis">
+
+    <div class="pageGrid">
+
+        <!-- 左側 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    AI分析
+
+                </h3>
+
+                <div class="analysisCards">
+
+                    <div class="analysisCard success">
+
+                        <h4>
+
+                            得意なブキ
+
+                        </h4>
+
+                        <img
+                            id="bestWeaponImage"
+                            src="assets/weapons/splattershot.png"
+                            alt="">
+
+                        <strong id="bestWeapon">
+
+                            スプラシューター
+
+                        </strong>
+
+                        <span id="bestWeaponRate">
+
+                            勝率 0%
+
+                        </span>
+
+                    </div>
+
+                    <div class="analysisCard danger">
+
+                        <h4>
+
+                            苦手なブキ
+
+                        </h4>
+
+                        <img
+                            id="worstWeaponImage"
+                            src="assets/weapons/liter4k.png"
+                            alt="">
+
+                        <strong id="worstWeapon">
+
+                            リッター4K
+
+                        </strong>
+
+                        <span id="worstWeaponRate">
+
+                            勝率 0%
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    得意ステージ
+
+                </h3>
+
+                <div id="bestStageList"
+                     class="analysisList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    苦手ステージ
+
+                </h3>
+
+                <div id="worstStageList"
+                     class="analysisList">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 右側 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    ルール別分析
+
+                </h3>
+
+                <div id="ruleAnalysis"
+                     class="analysisList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    時間帯分析
+
+                </h3>
+
+                <div id="timeAnalysis"
+                     class="analysisList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    オススメブキ
+
+                </h3>
+
+                <div id="recommendWeapon"
+                     class="analysisList">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+                <div class="card">
+
+                <h3>
+
+                    AIコメント
+
+                </h3>
+
+                <div id="aiComment" class="aiComment">
+
+                    <p>
+                        データが増えるとAI分析コメントが表示されます。
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    勝率推移
+
+                </h3>
+
+                <canvas
+                    id="analysisWinChart"
+                    height="180">
+
+                </canvas>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    K/D推移
+
+                </h3>
+
+                <canvas
+                    id="analysisKDChart"
+                    height="180">
+
+                </canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 下部分析 -->
+
+    <div class="analysisGrid">
+
+        <div class="card">
+
+            <h3>
+
+                サブ使用率ランキング
+
+            </h3>
+
+            <div
+                id="subRanking"
+                class="analysisList">
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                スペシャル使用率ランキング
+
+            </h3>
+
+            <div
+                id="specialAnalysisRanking"
+                class="analysisList">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="analysisGrid">
+
+        <div class="card">
+
+            <h3>
+
+                表彰ランキング
+
+            </h3>
+
+            <div
+                id="awardRanking"
+                class="analysisList">
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                ブキ熟練度ランキング
+
+            </h3>
+
+            <div
+                id="freshnessRanking"
+                class="analysisList">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="analysisGrid">
+
+        <div class="card">
+
+            <h3>
+
+                最近30試合の傾向
+
+            </h3>
+
+            <div id="recentAnalysis">
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                今月の成績
+
+            </h3>
+
+            <div id="monthAnalysis">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+WEAPON MASTER PAGE
+====================== -->
+
+<section
+    class="page"
+    id="weapon">
+
+    <div class="pageGrid">
+
+        <!-- 左 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    ブキマスター
+
+                </h3>
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="weaponSearch"
+                        placeholder="ブキ名で検索">
+
+                    <select
+                        id="weaponType">
+
+                        <option value="all">すべて</option>
+
+                        <option>シューター</option>
+
+                        <option>ローラー</option>
+
+                        <option>チャージャー</option>
+
+                        <option>ブラスター</option>
+
+                        <option>スロッシャー</option>
+
+                        <option>スピナー</option>
+
+                        <option>マニューバー</option>
+
+                        <option>シェルター</option>
+
+                        <option>ストリンガー</option>
+
+                        <option>ワイパー</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+                id="weaponGrid"
+                class="weaponGrid">
+
+            </div>
+
+        </div>
+
+        <!-- 右 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    ブキ詳細
+
+                </h3>
+
+                <div class="weaponProfile">
+
+                    <img
+                        id="masterWeaponImage"
+                        src="assets/weapons/splattershot.png"
+                        alt="">
+
+                    <h2
+                        id="masterWeaponName">
+
+                        スプラシューター
+
+                    </h2>
+
+                    <span
+                        id="masterWeaponClass">
+
+                        シューター
+
+                    </span>
+
+                </div>
+
+                <div class="weaponStats">
+
+                    <div class="statItem">
+
+                        <span>
+
+                            使用回数
+
+                        </span>
+
+                        <strong
+                            id="weaponBattle">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statItem">
+
+                        <span>
+
+                            勝率
+
+                        </span>
+
+                        <strong
+                            id="weaponWin">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statItem">
+
+                        <span>
+
+                            平均K/D
+
+                        </span>
+
+                        <strong
+                            id="weaponKD">
+
+                            0.00
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statItem">
+
+                        <span>
+
+                            熟練度
+
+                        </span>
+
+                        <strong
+                            id="weaponFreshness">
+
+                            ★0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+                        <div class="card">
+
+                <h3>
+
+                    ブキ情報
+
+                </h3>
+
+                <div class="weaponInfoGrid">
+
+                    <div class="infoItem">
+
+                        <span>サブ</span>
+
+                        <strong id="weaponSub">
+
+                            スプラッシュボム
+
+                        </strong>
+
+                    </div>
+
+                    <div class="infoItem">
+
+                        <span>スペシャル</span>
+
+                        <strong id="weaponSpecial">
+
+                            ウルトラショット
+
+                        </strong>
+
+                    </div>
+
+                    <div class="infoItem">
+
+                        <span>最終使用日</span>
+
+                        <strong id="weaponLastUsed">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+                    <div class="infoItem">
+
+                        <span>お気に入り</span>
+
+                        <strong id="weaponFavorite">
+
+                            ☆
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ルール別勝率
+
+                </h3>
+
+                <div
+                    id="weaponRuleStats"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ステージ別勝率
+
+                </h3>
+
+                <div
+                    id="weaponStageStats"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    最近20試合
+
+                </h3>
+
+                <canvas
+                    id="weaponHistoryChart"
+                    height="170">
+
+                </canvas>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    メモ
+
+                </h3>
+
+                <textarea
+                    id="weaponMemo"
+                    rows="6"
+                    placeholder="このブキの立ち回り・ギア構成・反省などを自由に記録できます。"></textarea>
+
+                <button
+                    id="saveWeaponMemo"
+                    class="primaryButton">
+
+                    保存
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+STAGE MASTER PAGE
+====================== -->
+
+<section
+    class="page"
+    id="stage">
+
+    <div class="pageGrid">
+
+        <!-- 左側 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    ステージ図鑑
+
+                </h3>
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="stageSearch"
+                        placeholder="ステージ名で検索">
+
+                    <select id="stageRuleFilter">
+
+                        <option value="all">すべてのルール</option>
+                        <option>ナワバリバトル</option>
+                        <option>ガチエリア</option>
+                        <option>ガチヤグラ</option>
+                        <option>ガチホコ</option>
+                        <option>ガチアサリ</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+                id="stageGrid"
+                class="stageGrid">
+
+            </div>
+
+        </div>
+
+        <!-- 右側 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <div class="stageProfile">
+
+                    <img
+                        id="stageImage"
+                        src="assets/stages/yunohana.jpg"
+                        alt="ステージ">
+
+                    <h2 id="stageName">
+
+                        ユノハナ大渓谷
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    基本成績
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>試合数</span>
+
+                        <strong id="stageBattle">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>勝率</span>
+
+                        <strong id="stageWin">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均K/D</span>
+
+                        <strong id="stageKD">
+
+                            0.00
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均塗り</span>
+
+                        <strong id="stagePaint">
+
+                            0p
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ルール別勝率
+
+                </h3>
+
+                <div
+                    id="stageRuleStats"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    このステージでよく使うブキ
+
+                </h3>
+
+                <div
+                    id="stageWeaponRanking"
+                    class="rankingList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    最近20試合
+
+                </h3>
+
+                <canvas
+                    id="stageHistoryChart"
+                    height="170">
+
+                </canvas>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ステージメモ
+
+                </h3>
+
+                <textarea
+                    id="stageMemo"
+                    rows="6"
+                    placeholder="立ち回り・打開・抑え・おすすめブキなどを記録"></textarea>
+
+                <button
+                    id="saveStageMemo"
+                    class="primaryButton">
+
+                    保存
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+SALMON RUN PAGE
+====================== -->
+
+<section
+    class="page"
+    id="salmon">
+
+    <div class="pageGrid">
+
+        <!-- 左側 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    サーモンラン記録
+
+                </h3>
+
+                <div class="formGrid">
+
+                    <div class="inputBox">
+
+                        <label>ステージ</label>
+
+                        <select id="salmonStage">
+
+                            <option>アラマキ砦</option>
+                            <option>ムニ・エール海洋発電所</option>
+                            <option>シェケナダム</option>
+                            <option>難破船ドン・ブラコ</option>
+                            <option>すじこジャンクション跡</option>
+                            <option>トキシラズいぶし工房</option>
+                            <option>どんぴこ闘技場</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>評価</label>
+
+                        <select id="salmonRank">
+
+                            <option>かけだし</option>
+                            <option>はんにんまえ</option>
+                            <option>いちにんまえ</option>
+                            <option>じゅくれん</option>
+                            <option>たつじん</option>
+                            <option>でんせつ</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>危険度</label>
+
+                        <input
+                            type="number"
+                            id="hazardLevel"
+                            placeholder="333">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>結果</label>
+
+                        <select id="salmonResult">
+
+                            <option>クリア</option>
+                            <option>失敗</option>
+                            <option>オカシラ討伐</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    支給ブキ
+
+                </h3>
+
+                <div class="weaponGrid4">
+
+                    <img id="weapon1"
+                    src="assets/weapons/random.png">
+
+                    <img id="weapon2"
+                    src="assets/weapons/random.png">
+
+                    <img id="weapon3"
+                    src="assets/weapons/random.png">
+
+                    <img id="weapon4"
+                    src="assets/weapons/random.png">
+
+                </div>
+
+            </div>
+                        <div class="card">
+
+                <h3>
+
+                    リザルト
+
+                </h3>
+
+                <div class="formGrid">
+
+                    <div class="inputBox">
+
+                        <label>金イクラ</label>
+
+                        <input
+                            type="number"
+                            id="goldenEgg"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>赤イクラ</label>
+
+                        <input
+                            type="number"
+                            id="powerEgg"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>オオモノ討伐数</label>
+
+                        <input
+                            type="number"
+                            id="bossSalmonid"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>デス数</label>
+
+                        <input
+                            type="number"
+                            id="salmonDeath"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>救助した回数</label>
+
+                        <input
+                            type="number"
+                            id="rescueCount"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>救助された回数</label>
+
+                        <input
+                            type="number"
+                            id="rescuedCount"
+                            min="0"
+                            value="0">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    オカシラ情報
+
+                </h3>
+
+                <div class="formGrid">
+
+                    <div class="inputBox">
+
+                        <label>オカシラ</label>
+
+                        <select id="kingSalmonid">
+
+                            <option>なし</option>
+                            <option>ヨコヅナ</option>
+                            <option>タツ</option>
+                            <option>ジョー</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <label>討伐結果</label>
+
+                        <select id="kingResult">
+
+                            <option>遭遇なし</option>
+                            <option>討伐成功</option>
+                            <option>討伐失敗</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    Waveメモ
+
+                </h3>
+
+                <textarea
+                    id="waveMemo"
+                    rows="6"
+                    placeholder="Waveごとの反省・味方編成・納品状況など"></textarea>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    リザルト画像
+
+                </h3>
+
+                <input
+                    type="file"
+                    id="salmonImages"
+                    multiple
+                    accept="image/*">
+
+                <div
+                    id="salmonImagePreview"
+                    class="imagePreview">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 右側 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    サーモンラン統計
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>総バイト数</span>
+
+                        <strong id="salmonTotal">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>クリア率</span>
+
+                        <strong id="salmonClearRate">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均金イクラ</span>
+
+                        <strong id="avgGoldenEgg">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均赤イクラ</span>
+
+                        <strong id="avgPowerEgg">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    オカシラ戦績
+
+                </h3>
+
+                <div
+                    id="kingStatistics"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    ステージ別成績
+
+                </h3>
+
+                <div
+                    id="salmonStageStatistics"
+                    class="statisticsList">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    危険度推移
+
+                </h3>
+
+                <canvas
+                    id="hazardChart"
+                    height="180">
+
+                </canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+CALENDAR PAGE
+====================== -->
+
+<section
+    class="page"
+    id="calendar">
+
+    <div class="pageGrid">
+
+        <!-- 左 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    試合カレンダー
+
+                </h3>
+
+                <div class="calendarToolbar">
+
+                    <button id="prevMonth">
+
+                        ◀
+
+                    </button>
+
+                    <h2 id="calendarTitle">
+
+                        2026年7月
+
+                    </h2>
+
+                    <button id="nextMonth">
+
+                        ▶
+
+                    </button>
+
+                </div>
+
+                <div class="weekHeader">
+
+                    <span>日</span>
+                    <span>月</span>
+                    <span>火</span>
+                    <span>水</span>
+                    <span>木</span>
+                    <span>金</span>
+                    <span>土</span>
+
+                </div>
+
+                <div
+                    id="calendarGrid"
+                    class="calendarGrid">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    今日の戦績
+
+                </h3>
+
+                <div id="todayBattleList">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 右 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    日別統計
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>試合数</span>
+
+                        <strong id="dayBattle">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>勝率</span>
+
+                        <strong id="dayWinRate">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均K/D</span>
+
+                        <strong id="dayKD">
+
+                            0.00
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>平均塗り</span>
+
+                        <strong id="dayPaint">
+
+                            0p
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    時間帯ヒートマップ
+
+                </h3>
+
+                <div
+                    id="heatMap"
+                    class="heatMap">
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    月間グラフ
+
+                </h3>
+
+                <canvas
+                    id="calendarChart"
+                    height="180">
+
+                </canvas>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    月間メモ
+
+                </h3>
+
+                <textarea
+                    id="calendarMemo"
+                    rows="6"
+                    placeholder="今月の目標・反省・チャレンジしたいこと"></textarea>
+
+                <button
+                    id="saveCalendarMemo"
+                    class="primaryButton">
+
+                    保存
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+SETTINGS PAGE
+====================== -->
+
+<section
+    class="page"
+    id="settings">
+
+    <div class="pageGrid">
+
+        <!-- 左側 -->
+
+        <div class="leftColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    データ管理
+
+                </h3>
+
+                <div class="settingGroup">
+
+                    <button
+                        id="exportJson"
+                        class="primaryButton">
+
+                        JSONを書き出す
+
+                    </button>
+
+                    <button
+                        id="importJson"
+                        class="secondaryButton">
+
+                        JSONを読み込む
+
+                    </button>
+
+                    <input
+                        type="file"
+                        id="importJsonFile"
+                        accept=".json"
+                        hidden>
+
+                </div>
+
+                <div class="settingGroup">
+
+                    <button
+                        id="exportCsv"
+                        class="primaryButton">
+
+                        CSVを書き出す
+
+                    </button>
+
+                </div>
+
+                <div class="settingGroup">
+
+                    <button
+                        id="backupData"
+                        class="primaryButton">
+
+                        バックアップ作成
+
+                    </button>
+
+                    <button
+                        id="restoreData"
+                        class="secondaryButton">
+
+                        バックアップ復元
+
+                    </button>
+
+                </div>
+
+                <div class="settingGroup">
+
+                    <button
+                        id="deleteAllData"
+                        class="dangerButton">
+
+                        全データ削除
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    表示設定
+
+                </h3>
+
+                <div class="settingRow">
+
+                    <span>
+
+                        ダークモード
+
+                    </span>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="darkMode">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="settingRow">
+
+                    <span>
+
+                        アニメーション
+
+                    </span>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="animation">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="settingRow">
+
+                    <span>
+
+                        通知
+
+                    </span>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notification">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 右側 -->
+
+        <div class="rightColumn">
+
+            <div class="card">
+
+                <h3>
+
+                    ストレージ情報
+
+                </h3>
+
+                <div class="statsGrid">
+
+                    <div class="statCard">
+
+                        <span>試合数</span>
+
+                        <strong id="storageBattle">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>画像</span>
+
+                        <strong id="storageImages">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>使用容量</span>
+
+                        <strong id="storageSize">
+
+                            0MB
+
+                        </strong>
+
+                    </div>
+
+                    <div class="statCard">
+
+                        <span>保存先</span>
+
+                        <strong>
+
+                            IndexedDB
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+
+                    このサイトについて
+
+                </h3>
+
+                <p>
+
+                    InkLog Ultimate
+
+                </p>
+
+                <p>
+
+                    Version 1.0
+
+                </p>
+
+                <p>
+
+                    Splatoon Battle Manager
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================
+GLOBAL IMAGE VIEWER
+====================== -->
+
+<div
+    id="imageViewer"
+    class="imageViewer hidden">
+
+    <button
+        id="closeImageViewer"
+        class="viewerClose">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+    <button
+        id="prevImage"
+        class="viewerArrow left">
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+    <img
+        id="viewerImage"
+        src=""
+        alt="Preview">
+
+    <button
+        id="nextImage"
+        class="viewerArrow right">
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+</div>
+
+<!-- ======================
+COMMON MODAL
+====================== -->
+
+<div
+    id="commonModal"
+    class="modal hidden">
+
+    <div class="modalContent">
+
+        <div class="modalHeader">
+
+            <h2 id="modalTitle">
+
+                タイトル
+
+            </h2>
+
+            <button
+                id="closeCommonModal"
+                class="iconButton">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div
+            id="modalBody">
+
+        </div>
+
+        <div class="modalFooter">
+
+            <button
+                id="modalCancel"
+                class="secondaryButton">
+
+                キャンセル
+
+            </button>
+
+            <button
+                id="modalOk"
+                class="primaryButton">
+
+                OK
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================
+DELETE DIALOG
+====================== -->
+
+<div
+    id="deleteDialog"
+    class="modal hidden">
+
+    <div class="modalContent small">
+
+        <h3>
+
+            このデータを削除しますか？
+
+        </h3>
+
+        <p>
+
+            削除したデータは元に戻せません。
+
+        </p>
+
+        <div class="modalFooter">
+
+            <button
+                id="cancelDelete"
+                class="secondaryButton">
+
+                キャンセル
+
+            </button>
+
+            <button
+                id="confirmDelete"
+                class="dangerButton">
+
+                削除
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================
+LOADING
+====================== -->
+
+<div
+    id="loadingScreen">
+
+    <div class="loadingLogo">
+
+        InkLog
+
+    </div>
+
+    <div class="loadingSpinner">
+
+    </div>
+
+    <p>
+
+        Loading...
+
+    </p>
+
+</div>
+
+<!-- ======================
+TOAST
+====================== -->
+
+<div
+    id="toastContainer">
+
+</div>
+
+<!-- ======================
+FOOTER
+====================== -->
+
+<footer>
+
+    <div class="footerLeft">
+
+        <strong>
+
+            InkLog Ultimate
+
+        </strong>
+
+        <span>
+
+            Personal Splatoon Battle Manager
+
+        </span>
+
+    </div>
+
+    <div class="footerRight">
+
+        <span>
+
+            Version 1.0
+
+        </span>
+
+    </div>
+
+</footer>
+
+<!-- ======================
+LIBRARIES
+====================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js"></script>
+
+<!-- ======================
+JAVASCRIPT
+====================== -->
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/history.js"></script>
+<script src="js/statistics.js"></script>
+<script src="js/analysis.js"></script>
+<script src="js/weapon.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/salmon.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
